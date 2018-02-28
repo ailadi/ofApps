@@ -3,9 +3,9 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    for(int i = 0; i < facades.size(); i++){
-      facades[i].setup();
-    }
+//    for(int i = 0; i < facades.size(); i++){
+//      facades[i].setup();
+//    }
     
 }
 
@@ -48,11 +48,14 @@ void ofApp::mouseDragged(int x, int y, int button){
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
     
-    for(int i = 0; i < facades.size(); i++){
-        facades[i].update();
-    }
-    facades.push_back( facade() );
+//    for(int i = 0; i < facades.size(); i++){
+//        facades[i].update();
+//    }
+    facade newFacade;
+    newFacade.update();
+    facades.push_back( newFacade );
    
+    cout << facades.size() << endl;
 }
 
 //--------------------------------------------------------------

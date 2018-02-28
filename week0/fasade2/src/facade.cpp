@@ -17,8 +17,12 @@ void facade::update() {
 }
 
 void facade::draw(){
-    
     ofSetColor(tint);
     ofDrawRectangle(x, y, width,height);
-    
+    for (int i=0; i< width-60; i+=8){
+        for (int j=0; j< height; j+=16){
+            ofSetColor(255);
+            ofDrawRectangle(20+x+i, 20+y+j, 4, 8);
+    }
+}
 }

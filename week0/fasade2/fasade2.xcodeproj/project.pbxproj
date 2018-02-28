@@ -107,8 +107,8 @@
 			children = (
 				82163C872A3C96852E1D5E0A /* facade.h */,
 				7079F943C0AB8D64205394E8 /* facade.cpp */,
-				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
+				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 			);
 			path = src;
