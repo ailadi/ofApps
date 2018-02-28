@@ -3,7 +3,6 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofBackground(255);
-    
     carta.load("paper.jpg");
 }
 
@@ -13,8 +12,7 @@ void ofApp::update(){
 }
 
 void ofApp::stripySquares(float x, float y, float w, float h, float divisions){
-    ofSetColor(0);
-    ofSetLineWidth(0.8);
+    
     int rnd1 = floor(ofRandom(10));
     for(int i=0; i<=divisions; i++){
         switch(rnd1){
@@ -46,7 +44,8 @@ void ofApp::stripySquares(float x, float y, float w, float h, float divisions){
 
 void ofApp::chooseStripySquares(float x, float y, float w, float h){
      int rnd2 = floor(ofRandom(3));
-    int divisions = 3+ofRandom(8);
+    //int divisions = 3+ofRandom(8);
+    int divisions = floor(ofMap(mouseX*ofRandom(10), 0, ofGetWidth()*10, 3, 8));
     switch(rnd2){
         case 0:
             stripySquares(x, y, w, h, divisions);
@@ -77,10 +76,10 @@ void ofApp::chooseStripySquares(float x, float y, float w, float h){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    
-    carta.draw(0,0,1000, 500);
-   
-    ofSeedRandom(mouseX*1000);
+    ofSeedRandom(1000);
+    //carta.draw(0,0,1000, 650);
+    ofSetColor(0);
+    ofSetLineWidth(0.8);
     for(int i=0; i<20; i++){
         for(int j=0; j<13; j++){
             chooseStripySquares(50*i, 50*j, 50, 50);
@@ -89,6 +88,7 @@ void ofApp::draw(){
             }
         }
     }
+    ofSetColor(255);
 }
 
 //--------------------------------------------------------------
@@ -113,6 +113,7 @@ void ofApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
+    
 
 }
 
