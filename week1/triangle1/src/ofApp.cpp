@@ -2,52 +2,32 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    ofBackground(255);
+    ofBackground(0);
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-
+  
 }
 
-
-void ofApp::roundLine(int x, int y, int thickness){
-    ofSetLineWidth(thickness);
-    ofSetColor(0);
-    ofDrawLine(x, 0-y, x, y);
-    ofDrawCircle(x, 0-y, thickness/2);
-    ofDrawCircle(x, y, thickness/2);
+void ofApp::tri(float x, float y, float r, float angle){
+    
+    ofPoint pt[3];
+    for (int i=0; i<3; i++){
+        pt[i].x = x + cos(TWO_PI/3*i +angle)*r;
+        pt[i].y = y + sin(TWO_PI/3*i +angle)*r;
+        ofSetColor(255);
+   }
+    ofDrawTriangle(pt[0], pt[1], pt[2]);
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-   
-    ofSeedRandom(mouseX);
- 
-    for (int i=0; i<500; i+=20){
-        for (int j=0; j<500; j+=20){
-            float rndAngle = ofRandom(-180,160);
-            ofPushMatrix();
-            ofTranslate(i, j);
-            ofRotate(rndAngle);
-            if(j<=160){
-                roundLine(0, 8, thickness);
-            } else if (j>160 && j<=320){
-                roundLine(6, 8, thickness);
-                roundLine(-6, 8, thickness);
-            } else {
-                roundLine(9, 8, thickness);
-                roundLine(0, 8, thickness);
-                roundLine(-9, 8, thickness);
-            }   
-            ofPopMatrix();
-        }
-    }
-            
     
+    float t = ofGetElapsedTimef();
+    tri(200,200, 100, t);
 
-    
-    
 }
 
 //--------------------------------------------------------------
