@@ -2,8 +2,8 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    
-    ofBackground(0);
+    ofBackground(200,200,255);
+    //ofSetBackgroundAuto(false);
 }
 
 //--------------------------------------------------------------
@@ -15,41 +15,38 @@ void ofApp::update(){
 void ofApp::draw(){
     
     
-    ofPoint pt;
-    float t = ofGetElapsedTimef();
     
-    //parameters
-    //float A = ofMap(sin(t*4), -1,1, 0, 400); // horizontal Amplitude
-    //float B = ofMap(sin(t*4), -1,1, 0, 400); // vertical Amplitude
-    float A = 400;
-    float B = 400;
     
-    float a = 3; // horizontal Frequency
-    float b = 2; // vertical Frequency
+    float t= ofGetElapsedTimef();
     
-    //float phaseDelta = ofMap(sin(t*4), -1,1,0,1);
-    float phase = TWO_PI/4;
-   
-    //center of my gfx
-    center.x = 500;
-    center.y = 500;
+    float amplitude=300;
     
-    pt.x = center.x + A*sin(a*t + phase);
-    pt.y = center.y + B*sin(b*t);
-
-    //draw
-    ofSetColor(255);
+    float k=ofMap(sin(t/10), -1, 1, 0, 3);
+    k=10;
     
-    ofDrawCircle(pt , 10);
-    
+    center.x = 400;
+    center.y = 400;
+ 
+    ofSetColor(255,255,0);
+    for (int i=0; i<100; i++){
+        float theta=ofMap(sin(t/40), -1, 1, 0, 1);
+        
+        pt.x = center.x + cos(k*theta*i)*cos(theta*i)*amplitude;
+        pt.y = center.y + cos(k*theta*i)*sin(theta*i)*amplitude;
+        ofSetColor(255,255,0);
+        ofDrawCircle(pt, 10);
+        
+        
+    }
 //    //draw line
 //    line.addVertex(pt.x, pt.y);
 //    if(line.size() > 1000){
 //        line.getVertices().erase(line.getVertices().begin());
 //    }
 //    line.draw();
+//
     
-    
+
 }
 
 //--------------------------------------------------------------

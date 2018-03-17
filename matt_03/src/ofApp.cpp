@@ -2,8 +2,7 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    
-    ofBackground(0);
+
 }
 
 //--------------------------------------------------------------
@@ -13,43 +12,22 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
+    ofNoFill();
+    ofSetCircleResolution(3);
     
+    //float radius = 100 + sin(angle*frequency + phase)*amplitude;
     
-    ofPoint pt;
-    float t = ofGetElapsedTimef();
-    
-    //parameters
-    //float A = ofMap(sin(t*4), -1,1, 0, 400); // horizontal Amplitude
-    //float B = ofMap(sin(t*4), -1,1, 0, 400); // vertical Amplitude
-    float A = 400;
-    float B = 400;
-    
-    float a = 3; // horizontal Frequency
-    float b = 2; // vertical Frequency
-    
-    //float phaseDelta = ofMap(sin(t*4), -1,1,0,1);
-    float phase = TWO_PI/4;
-   
-    //center of my gfx
-    center.x = 500;
-    center.y = 500;
-    
-    pt.x = center.x + A*sin(a*t + phase);
-    pt.y = center.y + B*sin(b*t);
-
-    //draw
-    ofSetColor(255);
-    
-    ofDrawCircle(pt , 10);
-    
-//    //draw line
-//    line.addVertex(pt.x, pt.y);
-//    if(line.size() > 1000){
-//        line.getVertices().erase(line.getVertices().begin());
-//    }
-//    line.draw();
-    
-    
+    for (int j=0; j<3; j++){
+        for (int i=0; i<20; i++){
+            float angle = ofMap(i, 0, 19, 0, TWO_PI)+ofGetElapsedTimef();
+            float radius = 100;
+            float r = 10 + sin(ofGetElapsedTimef() + i/10+ ofGetElapsedTimef() +j*0.2)*100;
+            float x = radius*cos(angle*2 + j*0.2);
+            float y = radius*sin(angle*3);
+            ofDrawCircle(x,y,r);
+        }
+    }
 }
 
 //--------------------------------------------------------------

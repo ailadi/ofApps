@@ -31,11 +31,11 @@ void ofApp::draw(){
     ofSetColor(255);
     ofNoFill();
     for (int i=100; i>1; i-=6){
-        triangolo(400+sin(t)*100,400+cos(t+i)*100,3*i);
+        triangolo(400+sin(t+0.01*pow(i,1.1))*100,400+cos(t+0.1*pow(i,1.1))*100,3*i);
     }
 
     
-    cout << PI/6 <<endl;
+    //cout << PI/6 <<endl;
    
 }
 
