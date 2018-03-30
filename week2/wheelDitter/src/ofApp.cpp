@@ -2,41 +2,53 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-
+    
+    
+    ofBackground(255);
+    wheel.load("wheel.png");
+    
+    for (int x=0; x<wheel.getWidth(); x++){
+        for (int y=0; y<wheel.getHeight(); y++){
+            if(wheel.getColor(x,y).a > 127){
+                
+                pixel temp;
+                temp.pos = ofPoint (x,y);
+                temp.orig = ofPoint (x,y);
+                temp.color = wheel.getColor(x,y);
+                temp.speed = ofRandom(0.5,0.99);
+                pixels.push_back(temp);
+            
+            }
+        }
+    }
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-
+    
+    for (int i=0; i< pixels.size(); i++){
+        
+        float distance = (pixels[i].pos - ofPoint(mouseX, mouseY)).length();
+        if (distance < 500){
+            float t = ofGetElapsedTimef();
+            pixels[i].pos.x = pixels[i].pos.x*pixels[i].speed
+            + (mouseX-wheel.getWidth()/2*sin(t) + pixels[i].orig.x*sin(t))*(1-pixels[i].speed);
+            pixels[i].pos.y = pixels[i].pos.y*pixels[i].speed
+            + (mouseY-wheel.getHeight()/2*cos(t) + pixels[i].orig.y*cos(t))*(1-pixels[i].speed);
+        } else {
+            pixels[i].pos.x = -100;
+            pixels[i].pos.y = -100;
+        }
+    }
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
-    float time = ofGetElapsedTimef();
-    float amplitude = 50;
-    float frequency = 3 + sin(time*0.1);
-    //float frequency =2*PI*floor(time);
-    float phase = 1 + time *10;
-    //float phase =
-    
-    int numDots = 100;
-    for (int i=0; i<numDots; i++) {
-        float angle = ofMap(i, 0, numDots, 0, TWO_PI);
-        float radius = 100 + sin(angle*frequency + phase)*amplitude;
 
-        float x = radius*cos(angle);
-        float y = radius*sin(angle);
-        
-        float xOriginal = 100*cos(angle);
-        float yOriginal = 100*sin(angle);
-        ofDrawCircle(x, y, 2);
-        //ofDrawCircle(xOriginal, yOriginal, 2);
-        //ofDrawLine(xOriginal, yOriginal, x, y);
+    for (int i=0; i<pixels.size(); i++){
+        ofSetColor(pixels[i].color);
+        ofDrawCircle(pixels[i].pos.x, pixels[i].pos.y, 1);
     }
-    
-    
-    
 }
 
 //--------------------------------------------------------------

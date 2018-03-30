@@ -3,40 +3,52 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 
+    ofBackground(0);
+    originalImg.load("cuteCat.jpg");
+    originalImg.setImageType(OF_IMAGE_COLOR);
+    
+    for (int i=0; i<9; i++){
+        img[i].load(to_string(i)+".png");
+        img[i].setImageType(OF_IMAGE_COLOR_ALPHA);
+    }
+ 
+    fbo.begin();
+    originalImg.draw(0,originalImg.getHeight());
+    fbo.end();
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
+ 
 
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
-    float time = ofGetElapsedTimef();
-    float amplitude = 50;
-    float frequency = 3 + sin(time*0.1);
-    //float frequency =2*PI*floor(time);
-    float phase = 1 + time *10;
-    //float phase =
     
-    int numDots = 100;
-    for (int i=0; i<numDots; i++) {
-        float angle = ofMap(i, 0, numDots, 0, TWO_PI);
-        float radius = 100 + sin(angle*frequency + phase)*amplitude;
-
-        float x = radius*cos(angle);
-        float y = radius*sin(angle);
-        
-        float xOriginal = 100*cos(angle);
-        float yOriginal = 100*sin(angle);
-        ofDrawCircle(x, y, 2);
-        //ofDrawCircle(xOriginal, yOriginal, 2);
-        //ofDrawLine(xOriginal, yOriginal, x, y);
+    
+  
+    int avgBox = 5;
+    for (int i=0; i<originalImg.getWidth(); i+=10){
+        for (int j=0; j<originalImg.getHeight(); j+=10){
+            for (int a= - avgBox; a <= avgBox; a++){
+                for (int b= - avgBox; b <= avgBox; b++){
+                 ofColor pixel = originalImg.getColor(i+a, j+b);
+                }
+            }
+            
+            
+            float brightness = pixel.getBrightness();
+            int radius = ofMap(brightness, 0,255, 1,9);
+            ofSetColor(255);
+            //ofDrawCircle(i, j, radius);
+            img[radius].draw(i,j);
+        }
     }
     
     
-    
+
 }
 
 //--------------------------------------------------------------

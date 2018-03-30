@@ -2,39 +2,46 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-
+    
+    img.load("hand.png");
+    img.setImageType(OF_IMAGE_COLOR_ALPHA);
+    ofBackground(0);
+    
+    ofHideCursor();
+ 
+    //ofSetBackgroundAuto(false);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
 
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
-    float time = ofGetElapsedTimef();
-    float amplitude = 50;
-    float frequency = 3 + sin(time*0.1);
-    //float frequency =2*PI*floor(time);
-    float phase = 1 + time *10;
-    //float phase =
-    
-    int numDots = 100;
-    for (int i=0; i<numDots; i++) {
-        float angle = ofMap(i, 0, numDots, 0, TWO_PI);
-        float radius = 100 + sin(angle*frequency + phase)*amplitude;
 
-        float x = radius*cos(angle);
-        float y = radius*sin(angle);
-        
-        float xOriginal = 100*cos(angle);
-        float yOriginal = 100*sin(angle);
-        ofDrawCircle(x, y, 2);
-        //ofDrawCircle(xOriginal, yOriginal, 2);
-        //ofDrawLine(xOriginal, yOriginal, x, y);
+   ofSetColor(0);
+    for (int i=0; i<20000; i++){
+        ofDrawCircle(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), 1);
     }
     
+    ofSetColor(255);
+    img.getPixel().draw(mouseX,mouseY);
+
+    
+    
+    
+
+    for (int i=0; i<img.getWidth(); i++){
+        for (int j=0; j<img.getHeight(); j++){
+            ofColor pixel = img.getColor(i,j);
+            pos.x = 0.7*i + 0.3*mouseX;
+            pos.y = 0.7*j + 0.3*mouseY;
+
+            ofDrawCircle(pos.x,pos.y, 1);
+        }
+    }
     
     
 }

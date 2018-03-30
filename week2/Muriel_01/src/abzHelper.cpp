@@ -43,7 +43,7 @@ vector < ofPolyline > abzHelper::getCharacterLines( char c, ofRectangle fitInsid
             
         }
     }
-
+    
     
     return lines;
 }
@@ -52,7 +52,7 @@ void abzHelper::drawCharacterIntoImage(ofImage & img, char c){
     
     
     ofRectangle bounds = ofRectangle(0,0, img.getWidth(), img.getHeight());
-
+    
     ofPath p = font.getCharacterAsPoints(c);
     vector < ofPolyline > lines = p.getOutline();
     
@@ -66,15 +66,15 @@ void abzHelper::drawCharacterIntoImage(ofImage & img, char c){
             temp.growToInclude(line.getBoundingBox());
             
         }
-//        for (auto pt : line){
-//            
-//            if (bSetYet == false){
-//                temp.setPosition(pt.x, pt.y);
-//            } else {
-//                temp.growToInclude(pt.x, pt.y);
-//            }
-//            bSetYet = true;
-//        }
+        //        for (auto pt : line){
+        //
+        //            if (bSetYet == false){
+        //                temp.setPosition(pt.x, pt.y);
+        //            } else {
+        //                temp.growToInclude(pt.x, pt.y);
+        //            }
+        //            bSetYet = true;
+        //        }
     }
     
     ofRectangle target = temp;
@@ -101,9 +101,6 @@ void abzHelper::drawCharacterIntoImage(ofImage & img, char c){
     
     fbo.readToPixels(img.getPixels());
     img.update();
-
+    
 }
-
-
-
 

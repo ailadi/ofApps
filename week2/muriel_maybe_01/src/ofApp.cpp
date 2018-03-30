@@ -2,6 +2,8 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+    font.load("HelveticaNeueMed.ttf", 500, true, true, true);
+    myImage.allocate(500,500, OF_IMAGE_GRAYSCALE);
 
 }
 
@@ -12,31 +14,18 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
-    float time = ofGetElapsedTimef();
-    float amplitude = 50;
-    float frequency = 3 + sin(time*0.1);
-    //float frequency =2*PI*floor(time);
-    float phase = 1 + time *10;
-    //float phase =
     
-    int numDots = 100;
-    for (int i=0; i<numDots; i++) {
-        float angle = ofMap(i, 0, numDots, 0, TWO_PI);
-        float radius = 100 + sin(angle*frequency + phase)*amplitude;
-
-        float x = radius*cos(angle);
-        float y = radius*sin(angle);
-        
-        float xOriginal = 100*cos(angle);
-        float yOriginal = 100*sin(angle);
-        ofDrawCircle(x, y, 2);
-        //ofDrawCircle(xOriginal, yOriginal, 2);
-        //ofDrawLine(xOriginal, yOriginal, x, y);
+    font.drawString("OH", 0,500);
+    for(int i=0; i<500; i++){
+        for (int j=0; j<500; j++){
+            myImage.getColor(i,j);
+            myImage.setColor(i,j, ofColor(ofRandom(0, 255)));
+            myImage.getPixels();
+        }
     }
     
-    
-    
+    myImage.draw(0,0);
+    myImage.update();
 }
 
 //--------------------------------------------------------------

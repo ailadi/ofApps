@@ -4,7 +4,7 @@
 void ofApp::setup(){
 
     
-    ABZ.loadFont("HelveticaNeueMed.ttf");
+    ABZ.loadFont("Helvetica.ttc");
     
     img.allocate(200, 200, OF_IMAGE_COLOR);
     ABZ.drawCharacterIntoImage(img, 'Z');
@@ -59,14 +59,41 @@ void ofApp::draw(){
         float radius = ofRandom(3, 35);
         if (brightness > 0){
             
-            for (int g=0; g<ofGetWidth(); g= g+50){
-                for (int j=0; j<ofGetHeight(); j= j+50){
-                    
-                    if (g < pt.x*4 || g ???????){
-                    ofDrawCircle(g, j, 10);
+            
+            for (int i = 0; i < 200; i+= 10){
+                for (int j = 0; j < 200; j+= 10){
+                    if (img.getColor(i, j).r > 127){
+                        ofDrawCircle(i*4,j*4,scaledVol*100);
+                    } else {
+                        ofDrawCircle(i*5,j*5,1);
                     }
                 }
             }
+            
+        }
+    }
+}
+        
+            //        }}
+//            for (int i=0; i<ofGetWidth(); i= i+50){
+//                for (int j=0; j<ofGetHeight(); j= j+50){
+//            if (img.getColor(i, j).r > 127){
+//
+//
+//            ofDrawCircle(i,j,scaledVol*100);
+//        } else {
+//            ofDrawCircle(i,j,1);
+//        }
+//    }
+//    }
+    
+//                    if (g < pt.x*4 || g ???????){
+//                    ofDrawCircle(g, j, 10);
+//                    }
+//                }
+//            }
+            
+            
 //            ofFill();
 //            ofSetColor(0);
 //            ofDrawCircle(pt.x * 3, pt.y * 3, radius);
@@ -74,10 +101,7 @@ void ofApp::draw(){
 //            ofSetColor(255);
 //            ofDrawCircle(pt.x * 3, pt.y * 3, radius);
             
-        }
-    }
-    
-}
+
 
 void ofApp::audioIn(float * input, int bufferSize, int nChannels){
     
