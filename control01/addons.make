@@ -1,0 +1,2 @@
+ofxNanoKontrol2-master
+ofxOsc

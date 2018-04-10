@@ -2,18 +2,6 @@
 
 #include "ofMain.h"
 
-class pixel {
-    
-public:
-    
-    ofPoint orig;
-    ofPoint pos;
-    ofColor color;
-    float magnetism;
-    
-};
-
-
 class ofApp : public ofBaseApp{
 
 	public:
@@ -32,12 +20,5 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-    
-    ofImage wheel;
-    vector < pixel > pixels;
-
-
+		
 };
-
-
-

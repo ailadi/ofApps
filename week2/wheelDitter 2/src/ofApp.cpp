@@ -13,7 +13,7 @@ void ofApp::setup(){
                 
                 pixel temp;
                 temp.pos = ofPoint (x,y);
-                temp.orig = ofPoint (x,y);
+                temp.orig = ofPoint (x-wheel.getWidth()/2,y-wheel.getHeight()/2);
                 temp.color = wheel.getColor(x,y);
                 temp.magnetism = ofRandom(0.5,0.99);
                 pixels.push_back(temp);
@@ -25,6 +25,7 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     
+    
     for (int i=0; i< pixels.size(); i++){
         
         float distance = (pixels[i].pos - ofPoint(mouseX, mouseY)).length();
@@ -33,18 +34,26 @@ void ofApp::update(){
             
             float magnetism = pixels[i].magnetism;
             
+            ofPoint original = pixels[i].orig;
+            float distance = ofDist(0, 0, original.x, original.y);
+            float angle = atan2(original.y, original.x);
+            angle = angle + t;
+            
+            ofPoint newOrig;
+            newOrig.x = 0 + distance*cos(angle);
+            newOrig.y = 0 + distance*sin(angle);
+            
+        
             float currPosX = pixels[i].pos.x;
-          float theProblemsX = (mouseX-wheel.getWidth()/2*sin(t)) + pixels[i].orig.x*sin(t);
-//            float theProblemsX = (mouseX-wheel.getWidth()/2) + pixels[i].orig.x;
-            pixels[i].pos.x = currPosX * magnetism + theProblemsX * (1-magnetism);
+            float newPosX = mouseX + newOrig.x;
+            
+            pixels[i].pos.x = currPosX * magnetism + newPosX * (1-magnetism);
             
             float currPosY = pixels[i].pos.y;
-            float theProblemsY = (mouseY -wheel.getHeight()/2*cos(t)) + pixels[i].orig.y*cos(t);
-//            float theProblemsY = (mouseY -wheel.getHeight()/2) + pixels[i].orig.y;
-            pixels[i].pos.y = currPosY * magnetism + theProblemsY * (1-magnetism);
+            float newPosY = mouseY + newOrig.y;
             
-//            pixels[i].pos.x += ofDist(mouseX, mouseY, pixels[i].pos.x, pixels[i].pos.y) * cos(t);
-//            pixels[i].pos.y += ofDist(mouseX, mouseY, pixels[i].pos.x, pixels[i].pos.y) * sin(t);
+            pixels[i].pos.y = currPosY * magnetism + newPosY * (1-magnetism);
+            
 
         } else {
             pixels[i].pos.x = -100;
